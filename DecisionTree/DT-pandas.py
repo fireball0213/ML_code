@@ -41,6 +41,19 @@ def Ent(data, flag):  # flag=1信息熵，flag=2基尼指数，flag=3缺失值
     return shang
 
 
+def split_dataset(data, feature, feature_value):
+    """
+    Split the dataset based on the feature and its value.
+    """
+    return data[data[feature] == feature_value].drop(columns=feature)
+
+
+def delete_empty_dataset(data, feature):
+    """
+    Delete the rows with missing values in the specified feature.
+    """
+    return data[data[feature] != -1].reset_index(drop=True)
+
 # 划分数据集  （DataFrame,特征列名,该列某个特征值）
 def splitdataSet(data, feature, feature_value):
     recvdata = []

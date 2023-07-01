@@ -10,6 +10,11 @@ def acc(pred, label):
     label=np.array(label)
     return np.sum(pred==label)/len(label)
 
+#计算MSE
+def MSE(pred, label):
+    pred=np.array(pred)
+    label=np.array(label)
+    return np.sum(np.square(pred-label))/len(label)
 
 # 实现计算percision， recall和F1 score的函数
 def p_r_f1(Y_pred, Y_gt):
@@ -35,3 +40,7 @@ def p_r_f1(Y_pred, Y_gt):
     f1 = 2 * precision * recall / (precision + recall)
 
     return precision, recall, f1
+
+def entropy(p):
+    return -p*np.log(p)-(1-p)*np.log(1-p)
+    #return np.sum(-p*np.log(p)) #这样写也可以，但是不够通用
