@@ -1,6 +1,6 @@
 # -*- coding: UTF-8 -*- #
 """
-@filename:LR-sklearn.py
+@filename:LinearR-sklearn.py
 @author:201300086
 @time:2023-06-30
 """
