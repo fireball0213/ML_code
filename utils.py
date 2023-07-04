@@ -23,13 +23,11 @@ def vote(*args):
             temp.append(args[j][i])
         result.append(np.argmax(np.bincount(np.array(temp))))
     result = np.array(result)
-    # result = np.argmax(np.bincount(np.array(args).T))
+    # result = np.argmax(np.bincount(np.array(args).T))#太简单的写法，会报错？
     #使用Counter类实现投票
     # result = np.array([Counter(temp).most_common(1)[0][0] for temp in np.array(args).T])
 
     return result
-
-
 
 
 

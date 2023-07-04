@@ -12,6 +12,7 @@ def L2_dis(a, b):
 
 def L1_dis(a, b):
     return np.linalg.norm(a - b, ord=1)
+    #return np.sum(np.absolute(x-y))
 
 def distance_matrix(X):
     # 直观的距离计算实现方法
@@ -28,7 +29,7 @@ def distance_matrix(X):
 def hold_out(X,Y,train_size=0.8):
     # 划分训练集和测试集
     # 首先打乱样本顺序
-    np.random.seed(0)
+    # np.random.seed(0)
     shuffle_index = np.random.permutation(X.shape[0])
     X = X[shuffle_index]
     Y = Y[shuffle_index]
@@ -43,7 +44,7 @@ def hold_out(X,Y,train_size=0.8):
 #k折交叉验证
 def k_fold(X,Y,k=5):
     # 首先打乱样本顺序
-    np.random.seed(0)
+    # np.random.seed(0)
     shuffle_index = np.random.permutation(X.shape[0])
     X = X[shuffle_index]
     Y = Y[shuffle_index]
@@ -52,7 +53,37 @@ def k_fold(X,Y,k=5):
     Y_folds = np.array_split(Y, k)
     return X_folds,Y_folds
 
-
+#自助法采样m次，有放回采样，m为样本总数。用于bagging
+def boot_strap(X, Y):
+    # 首先打乱样本顺序
+    X = np.array(X)
+    Y = np.array(Y)
+    m = X.shape[0]
+    # np.random.seed(0)
+    shuffle_index = np.random.permutation(m)
+    X = X[shuffle_index]
+    Y = Y[shuffle_index]
+    # 划分训练集和测试集
+    X_train = []
+    Y_train = []
+    for i in range(m):
+        index = np.random.randint(0, m)
+        X_train.append(X[index])
+        Y_train.append(Y[index])
+    return np.array(X_train), np.array(Y_train)
+def monte_carlo(X,Y,m=10):
+    # 首先打乱样本顺序
+    # np.random.seed(0)
+    shuffle_index = np.random.permutation(X.shape[0])
+    X = X[shuffle_index]
+    Y = Y[shuffle_index]
+    # 划分训练集和测试集
+    X_train = []
+    Y_train = []
+    for i in range(m):
+        X_train.append(X[i])
+        Y_train.append(Y[i])
+    return X_train,Y_train
 
 if __name__=="__main__":
     #测试留出法
